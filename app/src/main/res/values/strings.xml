@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Breja</string>
+    <string name="txt_titulo">Breja</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_beer">Cadastrar Cerveja</string>
+    <string name="add">Adicionar</string>
+    <string name="title_activity_botton_navigation">BottonNavigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_map">Mapa</string>
+    <string name="title_add">Adicionar</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="erro_internet">Falha ao Conectar</string>
+    <string-array name="type_beers_array">
+        <item>Lata</item>
+        <item>Garafa</item>
+    </string-array>
+    <string-array name="beers"></string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="cerveja">Cerveja</string>
+    <string name="apiKey">AIzaSyAw3EVLG3aazXZO4wgxzGZBjUrB5fuzq5Q</string>
+
+
+</resources>

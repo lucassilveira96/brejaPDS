@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".Activities.PerfilActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_foto_perfil"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="133dp"
+        app:civ_border_color="@color/color_logo"
+        app:civ_border_width="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars[15]" />
+
+    <TextView
+        android:id="@+id/TextView_nome_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="169dp"
+        android:fontFamily="@font/amatica_sc_bold"
+        android:text="Nome"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_foto_perfil" />
+
+    <TextView
+        android:id="@+id/textView_minhas_promocoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="128dp"
+        android:fontFamily="@font/amatica_sc_bold"
+        android:text="Minhas Promoções"
+        android:textAlignment="center"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:textColor="@color/color_logo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_nome_usuario" />
+
+    <TextView
+        android:id="@+id/textView_cadastrar_tipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="143dp"
+        android:fontFamily="@font/amatica_sc_bold"
+        android:text="Cadastrar Tipo"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/color_logo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrar_cerveja" />
+
+    <TextView
+        android:id="@+id/textView_cadastrar_estabelecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="143dp"
+        android:clickable="true"
+        android:fontFamily="@font/amatica_sc_bold"
+        android:onClick="onClick"
+        android:text="Cadastrar Estabelecimento"
+        android:textAlignment="center"
+        android:textColor="@color/color_logo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrar_tipo" />
+
+    <TextView
+        android:id="@+id/textView_cadastrar_cerveja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="130dp"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:fontFamily="@font/amatica_sc_bold"
+        android:text="Cadastrar Cerveja"
+        android:textColor="@color/color_logo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_minhas_promocoes" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="186dp"
+        android:background="@drawable/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrar_estabelecimento" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
+
+</android.support.constraint.ConstraintLayout>

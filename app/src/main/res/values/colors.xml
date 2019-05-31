@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1E66DA</color>
+    <color name="colorPrimaryDark">#1E66DA</color>
+    <color name="colorAccent">#fff</color>
+    <color name="colorBackground">#1E66DA</color>
+    <color name="design_defaul4t_color_primary_dark">#000</color>
+    <color name="color_logo">#fff</color>
+</resources>

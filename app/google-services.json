@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "309480197872",
+    "firebase_url": "https://breja-6265d.firebaseio.com",
+    "project_id": "breja-6265d",
+    "storage_bucket": "breja-6265d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309480197872:android:45631e07ca81078c",
+        "android_client_info": {
+          "package_name": "com.breja.breja_br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309480197872-906j3b78img04ccp1d7982bv5buqn514.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.breja.breja_br",
+            "certificate_hash": "4d525c10925a0df8f9a59faf559ff4f340facd97"
+          }
+        },
+        {
+          "client_id": "309480197872-22r715simfor442ptsj042mq5g20v0if.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHoe34vOXRWw_juRZARBBGu49TMO2nk68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309480197872-22r715simfor442ptsj042mq5g20v0if.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
