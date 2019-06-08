@@ -14,18 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.breja.breja_br.Models.Estabelecimento;
 import com.breja.breja_br.R;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CadastroEstabelecimentosActivity extends AppCompatActivity {
-    private GoogleApiClient googleApiClient;
     Button button_cadastrar;
     EditText editText_estabelecimento;
     double latPoint;
@@ -34,13 +30,36 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_estabelecimentos);
+        pedirPermissoes();
 
         button_cadastrar = findViewById(R.id.button_add_estabelecimento);
         editText_estabelecimento = findViewById(R.id.spinner_estabelecimento);
         button_cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pedirPermissoes();
+                final String nEstabelecimento = editText_estabelecimento.getText().toString();
+                Estabelecimento estabelecimento = new Estabelecimento(latPoint,lngPoint,nEstabelecimento.toUpperCase());
+                if (nEstabelecimento != ""){
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                    db.collection("Places")
+                            .add(estabelecimento)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(), "adicionado com sucesso"+latPoint, Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "erro ao adicionar", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+                else {
+                    editText_estabelecimento.setError("digite o nome do estabelecimento");
+                }
             }
         });
     }
@@ -53,30 +72,7 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
         }
         else
             configurarServico();
-            LatLng localizacao = new LatLng(latPoint, lngPoint);
-            final String nEstabelecimento = editText_estabelecimento.getText().toString();
-            Estabelecimento estabelecimento = new Estabelecimento(localizacao,nEstabelecimento);
-            if (nEstabelecimento != ""){
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                db.collection("Places")
-                        .add(estabelecimento)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(), "adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "erro ao adicionar", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-            else {
-                editText_estabelecimento.setError("digite o nome do estabelecimento");
-            }
 
     }
     public void onRequestPermissionsResult(int requestCode,

@@ -22,6 +22,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="cerveja">Cerveja</string>
     <string name="apiKey">AIzaSyAw3EVLG3aazXZO4wgxzGZBjUrB5fuzq5Q</string>
+    <string name="favorites">Favoritas</string>
 
 
 </resources>

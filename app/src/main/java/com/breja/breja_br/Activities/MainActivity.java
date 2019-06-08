@@ -1,6 +1,7 @@
 package com.breja.breja_br.Activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import com.breja.breja_br.Adapters.PromocoesAdapter;
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
+import com.breja.breja_br.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -22,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private BottomNavigationView navigationView;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private PromocoesAdapter adapter;
-
+    final double latPoint = 0;
+    final double lngPoint = 0;
+    private static final double DEFAULT_PLACES_DISTANCE = 20.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setQuery(query,Promocao.class)
                 .build();
 
-        adapter = new PromocoesAdapter(options);
+            adapter = new PromocoesAdapter(options);
+      //  if(FirebaseUtils.distanceFromDatabasePlace(25,-93,ocao) < DEFAULT_PLACES_DISTANCE){
+            RecyclerView recyclerView = findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+       // }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+
     }
 
 
@@ -83,5 +90,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return true;
     }
+
 
 }

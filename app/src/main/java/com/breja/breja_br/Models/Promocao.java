@@ -2,14 +2,18 @@ package com.breja.breja_br.Models;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class Promocao {
+import java.util.Date;
+
+
+public class Promocao{
     private String id;
     private String beer;
     private String type_beer;
     private String content;
     private String description;
     private String estabelecimento;
-    private LatLng latLng;
+    private double lat;
+    private double lng;
     private double value;
     private String UriImg;
     private String email;
@@ -17,13 +21,14 @@ public class Promocao {
     public Promocao(){
 
     }
-    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, LatLng latLng, double value, String uriImg, String email, int denunciado) {
+    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, double lat, double lng, double value, String uriImg, String email, int denunciado) {
         this.beer = beer;
         this.type_beer = type_beer;
         this.content = content;
         this.description = description;
         this.estabelecimento = estabelecimento;
-        this.latLng = latLng;
+        this.lat = lat;
+        this.lng = lng;
         this.value = value;
         UriImg = uriImg;
         this.email = email;
@@ -78,14 +83,6 @@ public class Promocao {
         this.estabelecimento = estabelecimento;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
-    }
-
     public double getValue() {
         return value;
     }
@@ -116,6 +113,22 @@ public class Promocao {
 
     public void setDenunciar(int denunciado) {
         this.denunciado = denunciado;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
 

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +44,9 @@ import com.google.firebase.storage.UploadTask;
 
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -56,9 +60,11 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     Button btn_add_promocao;
     EditText editText_descricao;
     EditText editText_valor;
+    EditText editText_validade;
     Uri imagem;
     Bitmap img;
-    LatLng latLng = new LatLng(0,3);
+    double lat=0;
+    double lng=0;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
     @Override
@@ -87,6 +93,11 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
         editText_descricao = findViewById(R.id.editText_description);
         editText_valor = findViewById(R.id.editText_valor);
         imageView = findViewById(R.id.imageView);
+        editText_validade = findViewById(R.id.editText_validade);
+
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN/NN/NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(editText_validade,smf);
+        editText_validade.addTextChangedListener(mtw);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +112,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
             @Override
             public void onClick(View v) {
                 mStorageRef = FirebaseStorage.getInstance().getReference();
+                getPlaces(spinner_places.getSelectedItem().toString());
                 String urlImg = "images/" + UUID.randomUUID() + ".jpg";
                 final StorageReference imagemReferencia = mStorageRef.child(urlImg);
                 Bitmap bitmap = img;
@@ -118,15 +130,17 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                         if (!task.isSuccessful()) {
                             throw task.getException();
                         }
+                        else{
+                            return imagemReferencia.getDownloadUrl();
+                        }
 
-                        return imagemReferencia.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
-                            Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(),spinner_type_beer.getSelectedItem().toString(),spinner_content.getSelectedItem().toString(),editText_descricao.getText().toString(),spinner_places.getSelectedItem().toString(), latLng,valor,downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),0);
+                            Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(),spinner_type_beer.getSelectedItem().toString(),spinner_content.getSelectedItem().toString(),editText_descricao.getText().toString(),spinner_places.getSelectedItem().toString(),lat,lng,valor,downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),0);
                             db.collection("Promotion")
                                     .add(novapromocao)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -134,6 +148,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                                         public void onSuccess(DocumentReference documentReference) {
                                             Toast.makeText(getApplicationContext(), "adicionado com sucesso", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                            getPlaces(spinner_places.getSelectedItem().toString());
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -270,7 +285,8 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(getApplicationContext(),document.getString("latlng"),Toast.LENGTH_SHORT).show();
+                                lat=document.getDouble("lat");
+                                lng=document.getDouble("lng");
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),"erro ao realizar a busca no banco de dados",Toast.LENGTH_SHORT).show();

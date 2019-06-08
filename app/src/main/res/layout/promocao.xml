@@ -29,8 +29,8 @@
                 android:layout_height="142dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,13 +43,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
                 android:text="Skol lata"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/btn_compartilhar"
                 app:layout_constraintStart_toEndOf="@+id/imgPromocao"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,23 +110,13 @@
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="4dp"
                 android:text="Valido"
-                android:textColor="@color/quantum_googredA700"
+                android:textColor="@color/quantum_indigo300"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imgPromocao"
                 app:layout_constraintTop_toBottomOf="@+id/txtEstabPromo"
                 app:layout_constraintVertical_bias="0.108" />
-
-            <Button
-                android:id="@+id/btn_compartilhar"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_favoritar"
@@ -138,7 +126,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/favorites"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_compartilhar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_denunciar"

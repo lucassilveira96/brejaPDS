@@ -1,30 +1,38 @@
 package com.breja.breja_br.Models;
 
 
-import com.google.android.gms.maps.model.LatLng;
+
 
 public class Estabelecimento {
-    private LatLng latLng;
+    private double lat;
+    private double lng;
     private String estabelecimento;
-    public Estabelecimento(LatLng latLng, String estabelecimento) {
-        this.latLng = latLng;
+    public Estabelecimento(double lat,double lng, String estabelecimento) {
+        this.lat=lat;
+        this.lng=lng;
         this.estabelecimento = estabelecimento;
     }
-
-    public LatLng getLatLng() {
-        return latLng;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
-    }
-
     public String getEstabelecimento() {
         return estabelecimento;
     }
 
     public void setEstabelecimento(String estabelecimento) {
         this.estabelecimento = estabelecimento;
+    }
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
 

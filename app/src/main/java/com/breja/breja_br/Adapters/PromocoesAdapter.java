@@ -34,8 +34,8 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
         holder.Produto.setText(model.getBeer()+" "+model.getType_beer()+" "+model.getContent());
         holder.Valor.setText("R$ "+model.getValue());
         holder.Descricao.setText(model.getDescription());
-        holder.Local.setText("Mercado Teste");
-        holder.Valido.setText("Valido até:"+"25/06/2019");
+        holder.Local.setText(model.getEstabelecimento());
+        holder.Valido.setText("Valido até:");
         Picasso.get().load(model.getUriImg()).into(holder.FotoPromocao);
 
         holder.btn_denunciar.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +66,12 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
                         });
             }
         });
+        holder.btn_favoritar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.Produto.setText(model.getUriImg());
+            }
+        });
 
     }
 
@@ -84,6 +90,7 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
         TextView Local;
         TextView Valido;
         Button btn_denunciar;
+        Button btn_favoritar;
         public PromocoesHolder(@NonNull View itemView) {
             super(itemView);
             FotoPromocao = itemView.findViewById(R.id.imgPromocao);
@@ -93,6 +100,7 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
             Local = itemView.findViewById(R.id.txtEstabPromo);
             Valido = itemView.findViewById(R.id.ValidadePromocao);
             btn_denunciar=itemView.findViewById(R.id.btn_denunciar);
+            btn_favoritar=itemView.findViewById(R.id.btn_favoritar);
 
         }
     }

@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -26,7 +26,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CadastroEstabelecimentosActivity"></activity>
+        <activity android:name=".Activities.PromocoesFavoritasActivity"></activity>
+        <activity android:name=".Activities.CadastroEstabelecimentosActivity" />
         <activity android:name=".Activities.MapsPlacesActivity" />
         <activity android:name=".Activities.PerfilActivity" />
         <activity android:name=".Activities.CadastroTipo" />
