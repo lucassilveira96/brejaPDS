@@ -191,7 +191,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(document.getString("name_beer"));
+                                list.add(document.getString("name_beer")+" "+document.getString("type_beer"));
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),"deu pau",Toast.LENGTH_SHORT).show();
@@ -208,7 +208,6 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     public void getTypeBeers(){
         final ArrayList<String>list=new ArrayList<>();
         db.collection("TypeBeers")
-                .whereEqualTo("released",true)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -232,7 +231,6 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     public void getContent(){
         final ArrayList<String>list=new ArrayList<>();
         db.collection("Content")
-                .whereEqualTo("released",true)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -1,14 +1,21 @@
 package com.breja.breja_br.Activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.breja.breja_br.Adapters.PromocoesAdapter;
 import com.breja.breja_br.Models.Promocao;
@@ -24,20 +31,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private BottomNavigationView navigationView;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private PromocoesAdapter adapter;
-    final double latPoint = 0;
-    final double lngPoint = 0;
-    private static final double DEFAULT_PLACES_DISTANCE = 20.0;
+    Location location;
+    double latPoint;
+    double maxLat;
+    double minLat;
+    double lngPoint;
+    double maxLng;
+    double minLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         navigationView = findViewById(R.id.navigation);
         navigationView.setSelectedItemId(R.id.navigation_home);
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.getMenu();
-
         setUpRecyclerView();
 
     }
@@ -51,23 +60,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         adapter.stopListening();
     }
     private void setUpRecyclerView(){
-        Query query= db.collection("Promotion").orderBy("value",Query.Direction.ASCENDING);
+        Query query = db.collection("Promotion")
+                .whereLessThanOrEqualTo("lat",maxLat);
+        db.collection("Promotion")
+                .whereLessThan("denunciar",6);
+        db.collection("Promotion")
+                .whereGreaterThan("lat",minLat);
+        db.collection("Promotion")
+                .whereLessThanOrEqualTo("lng",maxLng);
+        db.collection("Promotion")
+                .whereGreaterThanOrEqualTo("lng",minLat);
         FirestoreRecyclerOptions<Promocao> options = new FirestoreRecyclerOptions.Builder<Promocao>()
                 .setQuery(query,Promocao.class)
                 .build();
 
             adapter = new PromocoesAdapter(options);
-      //  if(FirebaseUtils.distanceFromDatabasePlace(25,-93,ocao) < DEFAULT_PLACES_DISTANCE){
             RecyclerView recyclerView = findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
-       // }
 
 
     }
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -90,6 +104,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return true;
     }
-
 
 }

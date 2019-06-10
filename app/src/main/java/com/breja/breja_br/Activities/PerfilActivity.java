@@ -60,7 +60,7 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_minhas_promocoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),MinhasPromocoes.class));
             }
         });
         textView_cadastro_tipo.setOnClickListener(new View.OnClickListener() {

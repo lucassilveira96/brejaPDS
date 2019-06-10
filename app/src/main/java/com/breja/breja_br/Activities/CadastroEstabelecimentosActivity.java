@@ -26,6 +26,7 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
     EditText editText_estabelecimento;
     double latPoint;
     double lngPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
