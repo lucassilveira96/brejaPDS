@@ -11,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.breja.breja_br.Models.Promocao;
+import com.breja.breja_br.Models.PromocoesFavoritas;
 import com.breja.breja_br.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,6 +26,7 @@ import com.squareup.picasso.Picasso;
 public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, PromocoesAdapter.PromocoesHolder> {
     int denunciar = 0;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
     public PromocoesAdapter(@NonNull FirestoreRecyclerOptions<Promocao> options) {
         super(options);
     }
@@ -35,7 +38,7 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
         holder.Valor.setText("R$ "+model.getValue());
         holder.Descricao.setText(model.getDescription());
         holder.Local.setText(model.getEstabelecimento());
-        holder.Valido.setText("Valido até:");
+        holder.Valido.setText("Valido até: "+model.getValidade());
         Picasso.get().load(model.getUriImg()).into(holder.FotoPromocao);
 
         holder.btn_denunciar.setOnClickListener(new View.OnClickListener() {
@@ -65,12 +68,47 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
 
                             }
                         });
+                db.collection("Favoritas")
+                        .whereEqualTo("uriImg",model.getUriImg())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        db.collection("Favoritas")
+                                                .document(document.getId())
+                                                .update("denunciado",denunciar);
+                                    }
+
+                                } else {
+
+                                }
+
+
+
+                            }
+                        });
+
             }
         });
         holder.btn_favoritar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.Produto.setText(model.getUriImg());
+                db.collection("Promotion")
+                        .whereEqualTo("uriImg",model.getUriImg())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    PromocoesFavoritas favoritas =  new PromocoesFavoritas(model.getBeer(),model.getType_beer(),model.getContent(),model.getDescription(),model.getEstabelecimento(),model.getLat(),model.getLng(),model.getValue(),model.getUriImg(),model.getEmail(),auth.getCurrentUser().getEmail(),model.getValidade(),model.getDenunciado());
+                                    db.collection("Favoritas")
+                                            .add(favoritas);
+                                }
+                            }
+                        });
+
             }
         });
 
@@ -90,6 +128,7 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
         TextView Valor;
         TextView Local;
         TextView Valido;
+        TextView Validade;
         Button btn_denunciar;
         Button btn_favoritar;
         public PromocoesHolder(@NonNull View itemView) {

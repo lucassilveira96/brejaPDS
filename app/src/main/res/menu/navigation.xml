@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_add_beer_black"
         android:title="@string/title_add" />
     <item
-        android:id="@+id/navigation_monitoramento"
+        android:id="@+id/navigation_favoritos"
         android:icon="@drawable/ic_star"
         android:title="@string/favorites" />
     <item

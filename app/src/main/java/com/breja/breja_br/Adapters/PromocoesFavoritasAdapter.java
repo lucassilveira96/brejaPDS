@@ -17,21 +17,24 @@ import com.breja.breja_br.Activities.MainActivity;
 import com.breja.breja_br.Activities.MinhasPromocoes;
 import com.breja.breja_br.Activities.PerfilActivity;
 import com.breja.breja_br.Models.Promocao;
+import com.breja.breja_br.Models.PromocoesFavoritas;
 import com.breja.breja_br.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
-public class MinhasPromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, MinhasPromocoesAdapter.PromocoesHolder> {
+public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao, PromocoesFavoritasAdapter.PromocoesHolder> {
     int denunciar = 0;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     private Context context;
-    public MinhasPromocoesAdapter(@NonNull FirestoreRecyclerOptions<Promocao> options) {
+    public PromocoesFavoritasAdapter(@NonNull FirestoreRecyclerOptions<Promocao> options) {
         super(options);
     }
     @Override
@@ -48,21 +51,22 @@ public class MinhasPromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, M
             @Override
             public void onClick(final View v) {
                 final int Id;
-                db.collection("Promotion").whereEqualTo("uriImg",model.getUriImg())
+                db.collection("Favoritas").whereEqualTo("usuario",auth.getCurrentUser().getEmail())
+                        .whereEqualTo("uriImg",model.getUriImg())
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            db.collection("Promotion")
+                            db.collection("Favoritas")
                                     .document(document.getId())
                                     .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    v.getContext().startActivity(new Intent(v.getContext(), PerfilActivity.class));
+                                    v.getContext().startActivity(new Intent(v.getContext(), MainActivity.class));
                                 }
                             });
                         }
-                        }
+                    }
                 });
             }
         });

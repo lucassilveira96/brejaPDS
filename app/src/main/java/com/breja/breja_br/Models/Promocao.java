@@ -17,11 +17,12 @@ public class Promocao{
     private double value;
     private String UriImg;
     private String email;
+    private String validade;
     private int denunciado;
     public Promocao(){
 
     }
-    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, double lat, double lng, double value, String uriImg, String email, int denunciado) {
+    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, double lat, double lng, double value, String uriImg, String email, String validade, int denunciado) {
         this.beer = beer;
         this.type_beer = type_beer;
         this.content = content;
@@ -33,6 +34,7 @@ public class Promocao{
         UriImg = uriImg;
         this.email = email;
         this.denunciado = denunciado;
+        this.validade = validade;
     }
 
     public String getId() {
@@ -130,6 +132,23 @@ public class Promocao{
     public void setLng(double lng) {
         this.lng = lng;
     }
+
+    public String getValidade() {
+        return validade;
+    }
+
+    public void setValidade(String validade) {
+        this.validade = validade;
+    }
+
+    public int getDenunciado() {
+        return denunciado;
+    }
+
+    public void setDenunciado(int denunciado) {
+        this.denunciado = denunciado;
+    }
+
 
 
 }

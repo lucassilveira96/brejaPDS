@@ -60,16 +60,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         adapter.stopListening();
     }
     private void setUpRecyclerView(){
+        db.collection("Promotion")
+                .whereGreaterThan("lat",25);
+        db.collection("Promotion")
+                .whereLessThanOrEqualTo("lng",-93);
+        db.collection("Promotion")
+                .whereGreaterThanOrEqualTo("lng",-93);
+        db.collection("Promotion")
+                .whereLessThanOrEqualTo("lat",25);
         Query query = db.collection("Promotion")
-                .whereLessThanOrEqualTo("lat",maxLat);
-        db.collection("Promotion")
                 .whereLessThan("denunciar",6);
-        db.collection("Promotion")
-                .whereGreaterThan("lat",minLat);
-        db.collection("Promotion")
-                .whereLessThanOrEqualTo("lng",maxLng);
-        db.collection("Promotion")
-                .whereGreaterThanOrEqualTo("lng",minLat);
         FirestoreRecyclerOptions<Promocao> options = new FirestoreRecyclerOptions.Builder<Promocao>()
                 .setQuery(query,Promocao.class)
                 .build();
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.navigation_map:
                 startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+                break;
+            case R.id.navigation_favoritos:
+                startActivity(new Intent(getApplicationContext(), PromocoesFavoritasActivity.class));
                 break;
 
 

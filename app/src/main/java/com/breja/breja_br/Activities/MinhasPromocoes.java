@@ -47,7 +47,9 @@ public class MinhasPromocoes extends AppCompatActivity {
         adapter.stopListening();
     }
     private void setUpRecyclerView(){
-        Query query= db.collection("Promotion").whereEqualTo("email",mAuth.getCurrentUser().getEmail()).orderBy("value",Query.Direction.ASCENDING);
+        Query query= db.collection("Promotion")
+                .whereEqualTo("email",mAuth.getCurrentUser().getEmail())
+                .whereLessThan("denunciar",6);
         FirestoreRecyclerOptions<Promocao> options = new FirestoreRecyclerOptions.Builder<Promocao>()
                 .setQuery(query,Promocao.class)
                 .build();

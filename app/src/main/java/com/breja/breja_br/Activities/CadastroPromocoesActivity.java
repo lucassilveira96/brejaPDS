@@ -140,7 +140,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
-                            Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(),spinner_type_beer.getSelectedItem().toString(),spinner_content.getSelectedItem().toString(),editText_descricao.getText().toString(),spinner_places.getSelectedItem().toString(),lat,lng,valor,downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),0);
+                            Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(),spinner_type_beer.getSelectedItem().toString(),spinner_content.getSelectedItem().toString(),editText_descricao.getText().toString(),spinner_places.getSelectedItem().toString(),lat,lng,valor,downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),editText_validade.getText().toString(),0);
                             db.collection("Promotion")
                                     .add(novapromocao)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

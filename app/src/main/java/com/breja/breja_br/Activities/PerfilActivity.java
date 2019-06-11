@@ -72,9 +72,9 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              mAuth.signOut();
-              finish();
-              startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                finish();
+
             }
         });
         textView_cadastro_estabelecimento.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +102,22 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
             case R.id.navigation_map:
                 startActivity(new Intent(getApplicationContext(),MapsActivity.class));
                 break;
+            case R.id.navigation_favoritos:
+                startActivity(new Intent(getApplicationContext(), PromocoesFavoritasActivity.class));
+                break;
 
         }
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

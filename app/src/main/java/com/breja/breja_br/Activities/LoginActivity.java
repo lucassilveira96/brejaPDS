@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-
         findViewById(R.id.btn_login_gmail).setOnClickListener(this);
         // [START config_signin]
         // Configure Google Sign In
