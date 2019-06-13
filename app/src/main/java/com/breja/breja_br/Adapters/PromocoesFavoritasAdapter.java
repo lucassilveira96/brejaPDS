@@ -33,9 +33,13 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
     int denunciar = 0;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    private double lat;
+    private double lng;
     private Context context;
-    public PromocoesFavoritasAdapter(@NonNull FirestoreRecyclerOptions<Promocao> options) {
+    public PromocoesFavoritasAdapter(@NonNull FirestoreRecyclerOptions<Promocao> options, double lat,double lng) {
         super(options);
+        this.lat=lat;
+        this.lng=lng;
     }
     @Override
     protected void onBindViewHolder(@NonNull final PromocoesHolder holder, final int position, @NonNull final Promocao model) {
@@ -62,7 +66,10 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
                                     .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    v.getContext().startActivity(new Intent(v.getContext(), MainActivity.class));
+                                    Intent i = new Intent(v.getContext(),MainActivity.class);
+                                    i.putExtra("lat",lat);
+                                    i.putExtra("lng",lng);
+                                    v.getContext().startActivity(new Intent(i));
                                 }
                             });
                         }

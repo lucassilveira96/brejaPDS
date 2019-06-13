@@ -30,11 +30,18 @@ public class PromocoesFavoritasActivity extends AppCompatActivity implements Bot
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private PromocoesFavoritasAdapter adapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    double latPoint;
+    double lngPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promocoes_favoritas);
+
+        Intent intent = getIntent();
+        Bundle i = intent.getExtras();
+        latPoint = i.getDouble("lat");
+        lngPoint = i.getDouble("lng");
 
         navigationView = findViewById(R.id.navigation_favorite);
         navigationView.setSelectedItemId(R.id.navigation_favoritos);
@@ -54,13 +61,12 @@ public class PromocoesFavoritasActivity extends AppCompatActivity implements Bot
     }
     private void setUpRecyclerView(){
         Query query = db.collection("Favoritas")
-                .whereEqualTo("usuario",mAuth.getCurrentUser().getEmail())
-                .whereLessThan("denunciado",6);
+                .whereEqualTo("usuario",mAuth.getCurrentUser().getEmail());
         FirestoreRecyclerOptions<Promocao> options = new FirestoreRecyclerOptions.Builder<Promocao>()
                 .setQuery(query,Promocao.class)
                 .build();
 
-        adapter = new PromocoesFavoritasAdapter(options);
+        adapter = new PromocoesFavoritasAdapter(options,latPoint,lngPoint);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,21 +78,36 @@ public class PromocoesFavoritasActivity extends AppCompatActivity implements Bot
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("lat",latPoint);
+                i.putExtra("lng",lngPoint);
+                startActivity(i);
                 break;
             case R.id.navigation_perfil:
-                startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
+                Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                x.putExtra("lat",latPoint);
+                x.putExtra("lng",lngPoint);
+                startActivity(x);
                 break;
 
             case navigation_add_promo:
-                startActivity(new Intent(getApplicationContext(), CadastroPromocoesActivity.class));
+                Intent z = new Intent(getApplicationContext(), CadastroPromocoesActivity.class);
+                z.putExtra("lat",latPoint);
+                z.putExtra("lng",lngPoint);
+                startActivity(z);
                 break;
 
             case R.id.navigation_map:
-                startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+                Intent m = new Intent(getApplicationContext(), MapsActivity.class);
+                m.putExtra("lat",latPoint);
+                m.putExtra("lng",lngPoint);
+                startActivity(m);
                 break;
             case R.id.navigation_favoritos:
-                startActivity(new Intent(getApplicationContext(), PromocoesFavoritasActivity.class));
+                Intent t = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                t.putExtra("lat",latPoint);
+                t.putExtra("lng",lngPoint);
+                startActivity(t);
                 break;
 
 

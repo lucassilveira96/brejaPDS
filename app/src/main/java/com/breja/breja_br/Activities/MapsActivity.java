@@ -1,16 +1,28 @@
 package com.breja.breja_br.Activities;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.breja.breja_br.R;
+import com.breja.breja_br.Utils.localizacao;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,22 +33,27 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.ByteArrayOutputStream;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
-
+    double latPoint;
+    double lngPoint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Intent intent = getIntent();
+        Bundle i = intent.getExtras();
+        latPoint = i.getDouble("lat");
+        lngPoint = i.getDouble("lng");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -56,13 +73,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 String tittle = document.get("beer").toString()+" "+"R$:"+document.get("value").toString()+" "+document.get("estabelecimento").toString();
                                 LatLng promocao = new LatLng(lat,lng);
                                 mMap.addMarker(new MarkerOptions().position(promocao).title(tittle));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(promocao));
-
                             }
                         } else {
                         }
+                        LatLng latLng = new LatLng(latPoint,lngPoint);
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(8).bearing(90).tilt(60).build();
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
                 });
 
+
     }
+
 }

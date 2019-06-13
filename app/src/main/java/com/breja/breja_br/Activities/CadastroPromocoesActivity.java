@@ -41,6 +41,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 
 import java.io.ByteArrayOutputStream;
@@ -48,6 +49,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+
+import static com.breja.breja_br.R.id.navigation_add_promo;
 
 
 public class CadastroPromocoesActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -65,6 +68,8 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     Bitmap img;
     double lat=0;
     double lng=0;
+    double latPoint;
+    double lngPoint;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
     @Override
@@ -77,6 +82,11 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
         getTypeBeers();
         getContent();
         getPlaces();
+
+        Intent intent = getIntent();
+        Bundle i = intent.getExtras();
+        latPoint = i.getDouble("lat");
+        lngPoint = i.getDouble("lng");
 
         navigationView = findViewById(R.id.navigation);
         navigationView.setSelectedItemId(R.id.navigation_add_promo);
@@ -111,6 +121,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
         btn_add_promocao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Uri downloadUri;
                 mStorageRef = FirebaseStorage.getInstance().getReference();
                 getPlaces(spinner_places.getSelectedItem().toString());
                 String urlImg = "images/" + UUID.randomUUID() + ".jpg";
@@ -162,6 +173,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                 });
             }
         });
+
     }
     public void tirarfoto(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -178,7 +190,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
             imagem=Uri.parse(image=img.toString());
             imageView.setImageBitmap(img);
         }
-        else Toast.makeText(getApplicationContext(),"algo deu errado",Toast.LENGTH_SHORT).show();
+        else startActivity(new Intent(getApplicationContext(),CadastroPromocoesActivity.class));
 
     }
     public void getBeers(){
@@ -237,7 +249,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(document.getString("content"));
+                                list.add(document.getString("qtd"));
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),"deu pau",Toast.LENGTH_SHORT).show();
@@ -297,23 +309,40 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.navigation_home:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                break;
-            case R.id.navigation_perfil:
-                startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
-                break;
+                case R.id.navigation_home:
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.putExtra("lat", latPoint);
+                    i.putExtra("lng", lngPoint);
+                    startActivity(i);
+                    break;
+                case R.id.navigation_perfil:
+                    Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                    x.putExtra("lat", latPoint);
+                    x.putExtra("lng", lngPoint);
+                    startActivity(x);
+                    break;
 
-            case R.id.navigation_add_promo:
-                startActivity(new Intent(getApplicationContext(), CadastroPromocoesActivity.class));
-                break;
+                case navigation_add_promo:
+                    Intent z = new Intent(getApplicationContext(), CadastroPromocoesActivity.class);
+                    z.putExtra("lat", latPoint);
+                    z.putExtra("lng", lngPoint);
+                    startActivity(z);
+                    break;
 
-            case R.id.navigation_map:
-                startActivity(new Intent(getApplicationContext(),MapsActivity.class));
-                break;
+                case R.id.navigation_map:
+                    Intent m = new Intent(getApplicationContext(), MapsActivity.class);
+                    m.putExtra("lat", latPoint);
+                    m.putExtra("lng", lngPoint);
+                    startActivity(m);
+                    break;
+                case R.id.navigation_favoritos:
+                    Intent t = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                    t.putExtra("lat", latPoint);
+                    t.putExtra("lng", lngPoint);
+                    startActivity(t);
+                    break;
 
-
-        }
+            }
         return true;
     }
 }

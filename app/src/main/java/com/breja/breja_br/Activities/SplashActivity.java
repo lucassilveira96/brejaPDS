@@ -19,7 +19,14 @@ public class SplashActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(getBaseContext(),MainActivity.class));
+                    Intent intent = getIntent();
+                    Bundle i = intent.getExtras();
+                    double latPoint = i.getDouble("lat");
+                    double lngPoint = i.getDouble("lng");
+                    Intent l = new Intent(getBaseContext(),MainActivity.class);
+                    l.putExtra("lat",latPoint);
+                    l.putExtra("lng",lngPoint);
+                    startActivity(l);
                     finish();
                 }
             }, 9000);

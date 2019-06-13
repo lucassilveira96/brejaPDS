@@ -63,6 +63,7 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
     private void pedirPermissoes() {
 
@@ -115,4 +116,5 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
         lngPoint = location.getLongitude();
 
     }
+
 }
