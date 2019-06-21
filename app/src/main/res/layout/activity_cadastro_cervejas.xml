@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/edt_name_beer"
-        android:layout_width="257dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
         android:layout_marginStart="77dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="77dp"
@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/edt_alcohol_content"
-        android:layout_width="257dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
         android:layout_marginStart="77dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="77dp"
@@ -135,7 +135,7 @@
 
     <Spinner
         android:id="@+id/spinner_type"
-        android:layout_width="257dp"
+        android:layout_width="0dp"
         android:layout_height="38dp"
         android:layout_marginStart="77dp"
         android:layout_marginTop="12dp"

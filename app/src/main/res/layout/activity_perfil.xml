@@ -8,8 +8,8 @@
     tools:context=".Activities.PerfilActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_foto_perfil"
-        android:layout_width="145dp"
+        android:id="@+id/imageView_foto_promocao"
+        android:layout_width="0dp"
         android:layout_height="145dp"
         android:layout_marginStart="133dp"
         android:layout_marginTop="28dp"
@@ -36,7 +36,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_foto_perfil" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_foto_promocao" />
 
     <TextView
         android:id="@+id/textView_minhas_promocoes"
@@ -112,7 +112,7 @@
 
     <Button
         android:id="@+id/button_logout"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="185dp"
         android:layout_marginTop="10dp"

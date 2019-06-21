@@ -50,7 +50,7 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_cadastro_cerveja = findViewById(R.id.textView_cadastrar_cerveja);
         textView_cadastro_tipo = findViewById(R.id.textView_cadastrar_tipo);
         textView_cadastro_estabelecimento = findViewById(R.id.textView_cadastrar_estabelecimento);
-        imageView_foto_perfil = findViewById(R.id.imageView_foto_perfil);
+        imageView_foto_perfil = findViewById(R.id.imageView_foto_promocao);
         button_logout = findViewById(R.id.button_logout);
         textView_nome_usuario = findViewById(R.id.TextView_nome_usuario);
         Uri imageUri = mAuth.getCurrentUser().getPhotoUrl();

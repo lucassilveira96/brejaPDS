@@ -47,7 +47,6 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import static com.breja.breja_br.R.id.navigation_add_promo;
@@ -158,7 +157,10 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             Toast.makeText(getApplicationContext(), "adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                            i.putExtra("lat", latPoint);
+                                            i.putExtra("lng", lngPoint);
+                                            startActivity(i);
                                             getPlaces(spinner_places.getSelectedItem().toString());
                                         }
                                     })

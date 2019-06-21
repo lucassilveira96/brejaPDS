@@ -1,7 +1,9 @@
 package com.breja.breja_br.Adapters;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.breja.breja_br.Activities.LoginActivity;
+import com.breja.breja_br.Activities.PerfilActivity;
+import com.breja.breja_br.Activities.PromocoesActivity;
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.Models.PromocoesFavoritas;
 import com.breja.breja_br.R;
@@ -111,6 +117,18 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
 
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), PromocoesActivity.class);
+                i.putExtra("image",model.getUriImg());
+                i.putExtra("lat",model.getLat());
+                i.putExtra("lng",model.getLng());
+                i.putExtra("valor",model.getValue());
+                i.putExtra("validade",model.getValidade());
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
@@ -120,17 +138,16 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.promocao,viewGroup,false);
         return new PromocoesHolder(v);
     }
-
-    class PromocoesHolder extends RecyclerView.ViewHolder{
+    class PromocoesHolder extends RecyclerView.ViewHolder {
         ImageView FotoPromocao;
         TextView Produto;
         TextView Descricao;
         TextView Valor;
         TextView Local;
         TextView Valido;
-        TextView Validade;
         Button btn_denunciar;
         Button btn_favoritar;
+
         public PromocoesHolder(@NonNull View itemView) {
             super(itemView);
             FotoPromocao = itemView.findViewById(R.id.imgPromocao);
@@ -139,9 +156,8 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
             Valor = itemView.findViewById(R.id.txtPrecoPromo);
             Local = itemView.findViewById(R.id.txtEstabPromo);
             Valido = itemView.findViewById(R.id.ValidadePromocao);
-            btn_denunciar=itemView.findViewById(R.id.btn_denunciar);
-            btn_favoritar=itemView.findViewById(R.id.btn_excluir);
-
+            btn_denunciar = itemView.findViewById(R.id.btn_denunciar);
+            btn_favoritar = itemView.findViewById(R.id.btn_excluir);
         }
     }
 }

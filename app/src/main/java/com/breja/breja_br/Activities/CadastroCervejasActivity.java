@@ -19,13 +19,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CadastroCervejasActivity extends AppCompatActivity{
+    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cervejas);
         getSupportActionBar().hide();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Button btn = findViewById(R.id.btn_add_beer);
+        btn = findViewById(R.id.btn_add_beer);
         final EditText edt_name_beer = findViewById(R.id.edt_name_beer);
         final EditText edt_alcohol_content = findViewById(R.id.edt_alcohol_content);
         final Spinner spinner_type = findViewById(R.id.spinner_type);

@@ -1,6 +1,7 @@
 package com.breja.breja_br.Activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,6 +26,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,6 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .whereLessThan("denunciar",6)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @SuppressLint("MissingPermission")
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -73,12 +77,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 String tittle = document.get("beer").toString()+" "+"R$:"+document.get("value").toString()+" "+document.get("estabelecimento").toString();
                                 LatLng promocao = new LatLng(lat,lng);
                                 mMap.addMarker(new MarkerOptions().position(promocao).title(tittle));
+                                mMap.addPolyline(new PolylineOptions().add(promocao).color(R.color.colorBackground));
                             }
                         } else {
                         }
-                        LatLng latLng = new LatLng(latPoint,lngPoint);
+                        LatLng latLng = new LatLng(latPoint,lngPoint);;
                         CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(8).bearing(90).tilt(60).build();
                         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        mMap.setMyLocationEnabled(true);
+                        mMap.setTrafficEnabled(true);
                     }
                 });
 

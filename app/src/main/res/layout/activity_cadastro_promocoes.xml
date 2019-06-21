@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="135dp"
         android:layout_marginStart="69dp"
         android:layout_marginTop="16dp"
@@ -21,11 +21,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginStart="176dp"
         android:layout_marginTop="112dp"
+        android:layout_marginEnd="176dp"
         app:backgroundTint="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -48,7 +50,7 @@
 
             <TextView
                 android:id="@+id/textView_cerveja"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="165dp"
                 android:layout_marginTop="5dp"
@@ -66,11 +68,11 @@
 
             <Spinner
                 android:id="@+id/spinner_beer"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:spinnerMode="dropdown"
                 android:textAlignment="center"
@@ -81,7 +83,7 @@
 
             <TextView
                 android:id="@+id/textView_type"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="5dp"
@@ -98,11 +100,11 @@
 
             <Spinner
                 android:id="@+id/spinner_type_beer"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +114,7 @@
 
             <TextView
                 android:id="@+id/textView_content"
-                android:layout_width="81dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="157dp"
                 android:layout_marginTop="5dp"
@@ -128,11 +130,11 @@
 
             <Spinner
                 android:id="@+id/spinner_content"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:spinnerMode="dropdown"
                 android:textAlignment="center"
@@ -143,7 +145,7 @@
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="156dp"
                 android:layout_marginTop="5dp"
@@ -160,11 +162,11 @@
 
             <TextView
                 android:id="@+id/textView_estabelecimento"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
+                android:layout_marginStart="125dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="156dp"
+                android:layout_marginEnd="125dp"
                 android:fontFamily="casual"
                 android:text="Estabelecimento"
                 android:textColor="@color/colorBackground"
@@ -177,11 +179,11 @@
 
             <EditText
                 android:id="@+id/editText_description"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -192,11 +194,11 @@
 
             <Spinner
                 android:id="@+id/spinner_estabelecimento"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -208,7 +210,7 @@
 
             <TextView
                 android:id="@+id/textView_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="174dp"
                 android:layout_marginTop="5dp"
@@ -225,11 +227,11 @@
 
             <EditText
                 android:id="@+id/editText_valor"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
                 android:inputType="numberDecimal"
@@ -241,11 +243,11 @@
 
             <TextView
                 android:id="@+id/textView_validade"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="168dp"
+                android:layout_marginStart="156dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="169dp"
+                android:layout_marginEnd="156dp"
                 android:fontFamily="casual"
                 android:text="Validade"
                 android:textColor="@color/colorBackground"
@@ -257,11 +259,11 @@
 
             <EditText
                 android:id="@+id/editText_validade"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="69dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="69dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
@@ -280,7 +282,7 @@
 
     <Button
         android:id="@+id/btn_cadastrar_promocao"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
         android:layout_marginTop="18dp"

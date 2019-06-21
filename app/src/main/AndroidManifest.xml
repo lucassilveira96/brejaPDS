@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
@@ -27,12 +28,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MinhasPromocoes"></activity>
+        <activity android:name=".Activities.MinhasPromocoes" />
         <activity android:name=".Activities.PromocoesFavoritasActivity" />
         <activity android:name=".Activities.CadastroEstabelecimentosActivity" />
-        <activity android:name=".Activities.MapsPlacesActivity" />
         <activity android:name=".Activities.PerfilActivity" />
         <activity android:name=".Activities.CadastroTipo" />
+        <activity android:name=".Activities.LoginActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,7 +53,8 @@
         <activity android:name=".Activities.SplashActivity" />
         <activity android:name=".Activities.CadastroPromocoesActivity" />
         <activity android:name=".Activities.CadastroCervejasActivity" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.PromocoesActivity" />
+        <activity android:name=".Activities.SplashInicialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
