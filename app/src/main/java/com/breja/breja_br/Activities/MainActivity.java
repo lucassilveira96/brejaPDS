@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onStop();
         adapter.stopListening();
     }
+    protected void onResume(){
+        super.onResume();
+    }
     private void setUpRecyclerView(){
         Query query = db.collection("Promotion")
                 .whereLessThan("denunciar",6);

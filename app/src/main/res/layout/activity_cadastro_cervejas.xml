@@ -39,25 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_ahlcolic_content" />
 
-    <TextView
-        android:id="@+id/textView_add_beer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="44dp"
-        android:fontFamily="cursive"
-        android:text="@string/add_beer"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorBackground"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btn_add_beer"
         android:layout_width="123dp"
@@ -81,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="177dp"
         android:fontFamily="casual"
         android:text="Nome"
@@ -92,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_add_beer" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/textView_ahlcolic_content"
@@ -144,5 +125,17 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_type" />"
+        app:layout_constraintTop_toBottomOf="@+id/textView_type" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="125dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/beeradd" />"
 </android.support.constraint.ConstraintLayout>

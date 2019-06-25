@@ -79,6 +79,7 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 finish();
 
