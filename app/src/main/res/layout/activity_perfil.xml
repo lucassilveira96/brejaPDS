@@ -8,7 +8,7 @@
     tools:context=".Activities.PerfilActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_foto_promocao"
+        android:id="@+id/img_foto_promocao"
         android:layout_width="0dp"
         android:layout_height="145dp"
         android:layout_marginStart="133dp"
@@ -36,7 +36,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_foto_promocao" />
+        app:layout_constraintTop_toBottomOf="@+id/img_foto_promocao" />
 
     <TextView
         android:id="@+id/textView_minhas_promocoes"

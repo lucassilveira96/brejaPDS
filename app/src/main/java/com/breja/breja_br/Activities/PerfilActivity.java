@@ -50,7 +50,7 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_cadastro_cerveja = findViewById(R.id.textView_cadastrar_cerveja);
         textView_cadastro_tipo = findViewById(R.id.textView_cadastrar_tipo);
         textView_cadastro_estabelecimento = findViewById(R.id.textView_cadastrar_estabelecimento);
-        imageView_foto_perfil = findViewById(R.id.imageView_foto_promocao);
+        imageView_foto_perfil = findViewById(R.id.img_foto_promocao);
         button_logout = findViewById(R.id.button_logout);
         textView_nome_usuario = findViewById(R.id.TextView_nome_usuario);
         Uri imageUri = mAuth.getCurrentUser().getPhotoUrl();
@@ -60,8 +60,10 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_cadastro_cerveja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CadastroCervejasActivity.class));
-                finish();
+                Intent z = new Intent(getApplicationContext(), CadastroCervejasActivity.class);
+                z.putExtra("lat",latPoint);
+                z.putExtra("lng",lngPoint);
+                startActivity(z);
             }
         });
         textView_minhas_promocoes.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,10 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_cadastro_tipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CadastroTipo.class));
+                Intent z = new Intent(getApplicationContext(), CadastroTipo.class);
+                z.putExtra("lat",latPoint);
+                z.putExtra("lng",lngPoint);
+                startActivity(z);
             }
         });
         button_logout.setOnClickListener(new View.OnClickListener() {

@@ -121,11 +121,12 @@ public class PromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, Promoco
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), PromocoesActivity.class);
+                i.putExtra("produto",model.getBeer()+" "+model.getType_beer()+" "+model.getContent());
+                i.putExtra("estabelecimento",model.getEstabelecimento());
                 i.putExtra("image",model.getUriImg());
                 i.putExtra("lat",model.getLat());
                 i.putExtra("lng",model.getLng());
                 i.putExtra("valor",model.getValue());
-                i.putExtra("validade",model.getValidade());
                 v.getContext().startActivity(i);
             }
         });

@@ -28,12 +28,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.EditPromotionActivity"></activity>
         <activity android:name=".Activities.MinhasPromocoes" />
         <activity android:name=".Activities.PromocoesFavoritasActivity" />
         <activity android:name=".Activities.CadastroEstabelecimentosActivity" />
         <activity android:name=".Activities.PerfilActivity" />
         <activity android:name=".Activities.CadastroTipo" />
-        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.SplashActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -50,11 +51,10 @@
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.SplashActivity" />
         <activity android:name=".Activities.CadastroPromocoesActivity" />
         <activity android:name=".Activities.CadastroCervejasActivity" />
         <activity android:name=".Activities.PromocoesActivity" />
-        <activity android:name=".Activities.SplashInicialActivity">
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -43,6 +43,10 @@ public class CadastroCervejasActivity extends AppCompatActivity{
                 String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 String type_beer = spinner_type.getSelectedItem().toString();
+                Intent intent = getIntent();
+                Bundle i = intent.getExtras();
+                double lat = i.getDouble("lat");
+                double lng = i.getDouble("lng");
                 if (name_beer.length() == 0) {
                     edt_name_beer.setError("Digite o nome da cerveja!");
                 } else if (alcohol_content.length() == 0) {
@@ -55,6 +59,10 @@ public class CadastroCervejasActivity extends AppCompatActivity{
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Toast.makeText(getApplicationContext(), "adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                                    Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                                    x.putExtra("lat",lat);
+                                    x.putExtra("lng",lng);
+                                    startActivity(x);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

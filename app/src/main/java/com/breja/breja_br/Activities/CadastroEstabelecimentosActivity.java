@@ -2,6 +2,7 @@ package com.breja.breja_br.Activities;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -48,7 +49,11 @@ public class CadastroEstabelecimentosActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(getApplicationContext(), "adicionado com sucesso"+latPoint, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                                    Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                                    x.putExtra("lat",latPoint);
+                                    x.putExtra("lng",lngPoint);
+                                    startActivity(x);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

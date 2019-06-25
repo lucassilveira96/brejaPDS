@@ -23,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.breja.breja_br.Models.Estabelecimento;
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
+import com.breja.breja_br.Utils.FirebaseUtils;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.gms.maps.model.LatLng;
@@ -69,6 +71,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
     double lng=0;
     double latPoint;
     double lngPoint;
+    private static final double DEFAULT_PLACES_DISTANCE = 20.0;
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
     @Override
@@ -274,7 +277,10 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(document.getString("estabelecimento"));
+                                Estabelecimento estabelecimento = new Estabelecimento(document.getDouble("lat"),document.getDouble("lng"),document.get("estabelecimento").toString());
+                                    if (FirebaseUtils.distanceFromDatabasePlace(latPoint, lngPoint, estabelecimento) < DEFAULT_PLACES_DISTANCE) {
+                                        list.add(document.getString("estabelecimento"));
+                                }
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),"erro ao realizar a busca no banco de dados",Toast.LENGTH_SHORT).show();

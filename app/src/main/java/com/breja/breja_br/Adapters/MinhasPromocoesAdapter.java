@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.breja.breja_br.Activities.EditPromotionActivity;
 import com.breja.breja_br.Activities.MainActivity;
 import com.breja.breja_br.Activities.MinhasPromocoes;
 import com.breja.breja_br.Activities.PerfilActivity;
@@ -64,6 +65,17 @@ public class MinhasPromocoesAdapter extends FirestoreRecyclerAdapter<Promocao, M
                         }
                         }
                 });
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),EditPromotionActivity.class);
+                i.putExtra("foto",model.getUriImg());
+                i.putExtra("produto",model.getBeer()+" "+model.getType_beer()+" "+model.getContent());
+                i.putExtra("valor",model.getValue());
+                i.putExtra("estabelecimento",model.getEstabelecimento());
+                v.getContext().startActivity(i);
             }
         });
     }
