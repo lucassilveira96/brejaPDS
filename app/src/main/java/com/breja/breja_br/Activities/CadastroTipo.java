@@ -2,6 +2,7 @@ package com.breja.breja_br.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,7 @@ public class CadastroTipo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_tipo);
         final EditText editText_type_beer = findViewById(R.id.editText_value_beer);
-        Button btn_cadastrar = findViewById(R.id.btn_cadastrar);
+        FloatingActionButton btn_cadastrar = findViewById(R.id.btn_cadastrar);
         Intent intent = getIntent();
         Bundle i = intent.getExtras();
         double lat = i.getDouble("lat");

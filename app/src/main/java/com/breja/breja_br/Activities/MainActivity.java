@@ -24,14 +24,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private PromocoesAdapter adapter;
     double latPoint;
     double lngPoint;
-
+    String activity="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);
         Bundle i = intent.getExtras();
+        activity = i.getString("activity");
         latPoint = i.getDouble("lat");
         lngPoint = i.getDouble("lng");
         navigationView = findViewById(R.id.navigation);
@@ -68,40 +71,47 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     }
+    protected void onPause(){
+        super.onPause();
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("lat",latPoint);
-                i.putExtra("lng",lngPoint);
-                startActivity(i);
                 break;
             case R.id.navigation_perfil:
                 Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                x.putExtra("activity","main");
                 x.putExtra("lat",latPoint);
                 x.putExtra("lng",lngPoint);
                 startActivity(x);
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
 
             case navigation_add_promo:
                 Intent z = new Intent(getApplicationContext(), CadastroPromocoesActivity.class);
+                z.putExtra("activity","main");
                 z.putExtra("lat",latPoint);
                 z.putExtra("lng",lngPoint);
                 startActivity(z);
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
 
             case R.id.navigation_map:
                 Intent m = new Intent(getApplicationContext(), MapsActivity.class);
+                m.putExtra("activity","main");
                 m.putExtra("lat",latPoint);
                 m.putExtra("lng",lngPoint);
                 startActivity(m);
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
             case R.id.navigation_favoritos:
                 Intent t = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                t.putExtra("activity","main");
                 t.putExtra("lat",latPoint);
                 t.putExtra("lng",lngPoint);
                 startActivity(t);
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
 
 

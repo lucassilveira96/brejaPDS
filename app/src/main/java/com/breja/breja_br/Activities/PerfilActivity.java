@@ -26,7 +26,6 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
     TextView textView_cadastro_tipo;
     ImageView imageView_foto_perfil;
     TextView textView_nome_usuario;
-    TextView textView_cadastro_estabelecimento;
     double latPoint;
     double lngPoint;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -49,7 +48,6 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         textView_minhas_promocoes = findViewById(R.id.textView_minhas_promocoes);
         textView_cadastro_cerveja = findViewById(R.id.textView_cadastrar_cerveja);
         textView_cadastro_tipo = findViewById(R.id.textView_cadastrar_tipo);
-        textView_cadastro_estabelecimento = findViewById(R.id.textView_cadastrar_estabelecimento);
         imageView_foto_perfil = findViewById(R.id.img_foto_promocao);
         button_logout = findViewById(R.id.button_logout);
         textView_nome_usuario = findViewById(R.id.TextView_nome_usuario);
@@ -90,13 +88,6 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
 
             }
         });
-        textView_cadastro_estabelecimento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CadastroEstabelecimentosActivity.class));
-            }
-        });
-
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
