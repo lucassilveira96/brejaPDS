@@ -2,10 +2,11 @@ package com.breja.breja_br.Models;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Promocao{
+public class Promocao implements Serializable {
     private String id;
     private String beer;
     private String type_beer;
@@ -19,10 +20,11 @@ public class Promocao{
     private String email;
     private String validade;
     private int denunciado;
+    private int curtir;
     public Promocao(){
 
     }
-    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, double lat, double lng, double value, String uriImg, String email, String validade, int denunciado) {
+    public Promocao(String beer, String type_beer, String content, String description, String estabelecimento, double lat, double lng, double value, String uriImg, String email, String validade, int denunciado, int curtir) {
         this.beer = beer;
         this.type_beer = type_beer;
         this.content = content;
@@ -35,6 +37,7 @@ public class Promocao{
         this.email = email;
         this.denunciado = denunciado;
         this.validade = validade;
+        this.curtir = curtir;
     }
 
     public String getId() {
@@ -149,6 +152,13 @@ public class Promocao{
         this.denunciado = denunciado;
     }
 
+    public int getCurtir() {
+        return curtir;
+    }
+
+    public void setCurtir(int curtir) {
+        this.curtir = curtir;
+    }
 
 
 }

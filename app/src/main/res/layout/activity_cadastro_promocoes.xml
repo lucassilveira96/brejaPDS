@@ -13,13 +13,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -178,9 +177,9 @@
                 android:layout_marginEnd="45dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
-                android:textCursorDrawable="@drawable/my_cursor"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
+                android:textCursorDrawable="@drawable/my_cursor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -244,9 +243,9 @@
                 android:layout_width="0dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="45dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="45dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
                 android:inputType="date"
@@ -255,12 +254,11 @@
                 android:scrollbars="vertical"
                 android:textAlignment="center"
                 android:textCursorDrawable="@drawable/my_cursor"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btn_add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_validade"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_validade" />
 
             <TextView
                 android:id="@+id/txt_estabelecimento"
@@ -277,25 +275,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fab" />
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="307dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:text="Button"
+                android:tint="@color/color_logo"
+                app:backgroundTint="@color/quantum_googgreenA400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/color_logo"
+                app:srcCompat="@drawable/accept" />
+
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="307dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
-        android:text="Button"
-        android:tint="@color/color_logo"
-        app:backgroundTint="@color/quantum_googgreenA400"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@color/color_logo"
-        app:srcCompat="@drawable/accept" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

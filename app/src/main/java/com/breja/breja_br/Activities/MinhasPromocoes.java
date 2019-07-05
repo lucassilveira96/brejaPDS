@@ -1,16 +1,11 @@
 package com.breja.breja_br.Activities;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
-
 import com.breja.breja_br.Adapters.MinhasPromocoesAdapter;
-import com.breja.breja_br.Adapters.PromocoesAdapter;
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -18,11 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import static com.breja.breja_br.R.id.navigation_add_promo;
 
 public class MinhasPromocoes extends AppCompatActivity {
-
-    private BottomNavigationView navigationView;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MinhasPromocoesAdapter adapter;
     final double latPoint = 0;
@@ -48,8 +40,7 @@ public class MinhasPromocoes extends AppCompatActivity {
     }
     private void setUpRecyclerView(){
         Query query= db.collection("Promotion")
-                .whereEqualTo("email",mAuth.getCurrentUser().getEmail())
-                .whereLessThan("denunciar",6);
+                .whereEqualTo("email",mAuth.getCurrentUser().getEmail());
         FirestoreRecyclerOptions<Promocao> options = new FirestoreRecyclerOptions.Builder<Promocao>()
                 .setQuery(query,Promocao.class)
                 .build();

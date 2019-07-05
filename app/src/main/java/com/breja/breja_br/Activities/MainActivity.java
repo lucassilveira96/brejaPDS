@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-
 import com.breja.breja_br.Adapters.PromocoesAdapter;
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
@@ -118,6 +117,75 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home://ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                switch (activity) {
+                    case "main":
+                        break;
+                    case "perfil":
+                        Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                        x.putExtra("activity","main");
+                        x.putExtra("lat", latPoint);
+                        x.putExtra("lng", lngPoint);
+                        startActivity(x);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                    case "favoritas":
+                        Intent z = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                        z.putExtra("activity","main");
+                        z.putExtra("lat", latPoint);
+                        z.putExtra("lng", lngPoint);
+                        startActivity(z);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                    case "maps":
+                        Intent j = new Intent(getApplicationContext(), MapsActivity.class);
+                        j.putExtra("activity","main");
+                        j.putExtra("lat", latPoint);
+                        j.putExtra("lng", lngPoint);
+                        startActivity(j);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+
+                }
+                break;
+        }
+        return true;
+    }
+    @Override
+    public void onBackPressed(){ //Botão BACK padrão do android
+        switch (activity) {
+            case "perfil":
+                Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                x.putExtra("activity","main");
+                x.putExtra("lat", latPoint);
+                x.putExtra("lng", lngPoint);
+                startActivity(x);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            case "favoritas":
+                Intent z = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                z.putExtra("activity","main");
+                z.putExtra("lat", latPoint);
+                z.putExtra("lng", lngPoint);
+                startActivity(z);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            case "maps":
+                Intent j = new Intent(getApplicationContext(), MapsActivity.class);
+                j.putExtra("activity","main");
+                j.putExtra("lat", latPoint);
+                j.putExtra("lng", lngPoint);
+                startActivity(j);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+
+        }
+        return;
+    }
+
 
 
 }

@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.breja.breja_br.Models.PromocoesFavoritas;
 import com.breja.breja_br.R;
+import com.google.common.collect.Maps;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -28,15 +30,17 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
     TextView textView_nome_usuario;
     double latPoint;
     double lngPoint;
+    String activity;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-        getSupportActionBar().hide();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);
         Intent intent = getIntent();
         Bundle i = intent.getExtras();
+        activity = i.getString("activity");
         latPoint = i.getDouble("lat");
         lngPoint = i.getDouble("lng");
 
@@ -94,12 +98,14 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("activity","perfil");
                 i.putExtra("lat",latPoint);
                 i.putExtra("lng",lngPoint);
                 startActivity(i);
                 break;
             case R.id.navigation_perfil:
                 Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
+                x.putExtra("activity","perfil");
                 x.putExtra("lat",latPoint);
                 x.putExtra("lng",lngPoint);
                 startActivity(x);
@@ -107,6 +113,7 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
 
             case navigation_add_promo:
                 Intent z = new Intent(getApplicationContext(), CadastroPromocoesActivity.class);
+                z.putExtra("activity","perfil");
                 z.putExtra("lat",latPoint);
                 z.putExtra("lng",lngPoint);
                 startActivity(z);
@@ -114,12 +121,14 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
 
             case R.id.navigation_map:
                 Intent m = new Intent(getApplicationContext(), MapsActivity.class);
+                m.putExtra("activity","perfil");
                 m.putExtra("lat",latPoint);
                 m.putExtra("lng",lngPoint);
                 startActivity(m);
                 break;
             case R.id.navigation_favoritos:
                 Intent t = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                t.putExtra("activity","perfil");
                 t.putExtra("lat",latPoint);
                 t.putExtra("lng",lngPoint);
                 startActivity(t);
@@ -137,5 +146,70 @@ public class PerfilActivity extends AppCompatActivity implements BottomNavigatio
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home://ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                switch (activity) {
+                    case "main":
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra("activity","perfil");
+                        i.putExtra("lat", latPoint);
+                        i.putExtra("lng", lngPoint);
+                        startActivity(i);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                    case "maps":
+                        Intent x = new Intent(getApplicationContext(), MapsActivity.class);
+                        x.putExtra("activity","perfil");
+                        x.putExtra("lat", latPoint);
+                        x.putExtra("lng", lngPoint);
+                        startActivity(x);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                    case "favoritas":
+                        Intent z = new Intent(getApplicationContext(), PerfilActivity.class);
+                        z.putExtra("activity","perfil");
+                        z.putExtra("lat", latPoint);
+                        z.putExtra("lng", lngPoint);
+                        startActivity(z);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                }
+                break;
+        }
+        return true;
+    }
+    @Override
+    public void onBackPressed(){ //Botão BACK padrão do android
+        switch (activity) {
+            case "main":
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("activity","perfil");
+                i.putExtra("lat", latPoint);
+                i.putExtra("lng", lngPoint);
+                startActivity(i);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            case "maps":
+                Intent x = new Intent(getApplicationContext(), Maps.class);
+                x.putExtra("activity","perfil");
+                x.putExtra("lat", latPoint);
+                x.putExtra("lng", lngPoint);
+                startActivity(x);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            case "favoritas":
+                Intent z = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
+                z.putExtra("activity","perfil");
+                z.putExtra("lat", latPoint);
+                z.putExtra("lng", lngPoint);
+                startActivity(z);  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+
+        }
+        return;
     }
 }

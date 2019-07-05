@@ -14,15 +14,15 @@
         tools:layout_editor_absoluteY="111dp">
 
         <EditText
-            android:id="@+id/editText_value_beer"
+            android:id="@+id/editText_comentario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/edittext_style"
-            android:inputType="numberDecimal"
             android:ems="10"
+            android:inputType="numberDecimal"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +46,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:text="brahma"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_foto_promocao" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_etb" />
 
         <TextView
             android:id="@+id/txt_etb"
@@ -65,24 +66,28 @@
             android:text="bar do tobias"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_value_beer" />
+            app:layout_constraintTop_toBottomOf="@+id/img_foto_promocao" />
 
-        <Button
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_edit_promotion"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="29dp"
-            android:layout_marginEnd="50dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="336dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/button_style"
             android:fontFamily="casual"
+            android:src="@android:drawable/ic_menu_edit"
             android:text="editar"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:tint="@color/color_logo"
+            app:backgroundTint="@color/quantum_deeporangeA700"
+            app:fabCustomSize="50dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_etb" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_comentario"
+            app:rippleColor="@color/color_logo" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

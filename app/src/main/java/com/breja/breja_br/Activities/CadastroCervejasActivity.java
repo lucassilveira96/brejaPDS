@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.breja.breja_br.Models.Cervejas;
 import com.breja.breja_br.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,7 +61,9 @@ public class CadastroCervejasActivity extends AppCompatActivity{
                                     Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
                                     x.putExtra("lat",lat);
                                     x.putExtra("lng",lng);
+                                    finishAffinity();
                                     startActivity(x);
+
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -79,7 +79,9 @@ public class CadastroCervejasActivity extends AppCompatActivity{
     }
     public void onClick(View arg0) {
         Intent i = new Intent(getApplicationContext(), PerfilActivity.class);
+        finishAffinity();
         startActivity(i);
+
 
     }
 

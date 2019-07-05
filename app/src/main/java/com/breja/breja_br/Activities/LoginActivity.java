@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.breja.breja_br.R;
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int RC_SIGN_IN = 9001;
     double latPoint;
     double lngPoint;
+    ProgressBar progressBar;
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -45,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         findViewById(R.id.btn_login_gmail).setOnClickListener(this);
+        progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.INVISIBLE);
         pedirPermissoes();
         // [START config_signin]
         // Configure Google Sign In
@@ -87,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+                findViewById(R.id.btn_login_gmail).setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -105,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(getApplicationContext(), SplashActivity.class);
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             i.putExtra("lat",latPoint);
                             i.putExtra("lng",lngPoint);
                             startActivity(i);

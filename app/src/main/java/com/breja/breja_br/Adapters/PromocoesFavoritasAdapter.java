@@ -1,7 +1,6 @@
 package com.breja.breja_br.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.breja.breja_br.Activities.MainActivity;
-import com.breja.breja_br.Activities.MinhasPromocoes;
-import com.breja.breja_br.Activities.PerfilActivity;
 import com.breja.breja_br.Models.Promocao;
-import com.breja.breja_br.Models.PromocoesFavoritas;
 import com.breja.breja_br.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -43,6 +37,7 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
     }
     @Override
     protected void onBindViewHolder(@NonNull final PromocoesHolder holder, final int position, @NonNull final Promocao model) {
+        holder.btn_alert.setVisibility(View.INVISIBLE);
         denunciar =model.getDenunciar();
         Uri uri = Uri.parse(Uri.decode(model.getUriImg()));
         holder.Produto.setText(model.getBeer()+" "+model.getType_beer()+" "+model.getContent());
@@ -66,10 +61,7 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
                                     .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Intent i = new Intent(v.getContext(),MainActivity.class);
-                                    i.putExtra("lat",lat);
-                                    i.putExtra("lng",lng);
-                                    v.getContext().startActivity(new Intent(i));
+
                                 }
                             });
                         }
@@ -94,6 +86,7 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
         TextView Local;
         TextView Valido;
         Button excluir;
+        Button btn_alert;
         public PromocoesHolder(@NonNull View itemView) {
             super(itemView);
             FotoPromocao = itemView.findViewById(R.id.imgPromocao);
@@ -102,7 +95,8 @@ public class PromocoesFavoritasAdapter extends FirestoreRecyclerAdapter<Promocao
             Valor = itemView.findViewById(R.id.txtPrecoPromo);
             Local = itemView.findViewById(R.id.txtEstabPromo);
             Valido = itemView.findViewById(R.id.ValidadePromocao);
-            excluir = itemView.findViewById(R.id.btn_excluir);
+            excluir = itemView.findViewById(R.id.btn_excluir_coment);
+            btn_alert = itemView.findViewById(R.id.btn_alert);
 
         }
     }

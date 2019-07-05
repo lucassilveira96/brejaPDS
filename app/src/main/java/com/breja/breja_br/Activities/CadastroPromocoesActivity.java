@@ -16,19 +16,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.breja.breja_br.Models.Promocao;
 import com.breja.breja_br.R;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
@@ -42,8 +38,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,9 +51,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
-
-import static com.breja.breja_br.R.id.map;
 import static com.breja.breja_br.R.id.navigation_add_promo;
 
 
@@ -130,7 +123,8 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
         btn_add_promocao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText_descricao.getText().toString().length() == 0 || editText_valor.getText().toString().length()==0 || checkDateFormat(editText_validade.getText().toString())==false || txt_estabelecimento.getText().toString().length()==0 || imageView.getDrawable() == null){
+
+                if (editText_descricao.getText().toString().length() == 0 || editText_valor.getText().toString().length()==0 || checkDateFormat(editText_validade.getText().toString())==false || txt_estabelecimento.getText().toString().length()==0 || imageView.getDrawable() == null || validDate(editText_validade.getText().toString())==false){
                     //Cria o gerador do AlertDialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     //define o titulo
@@ -150,13 +144,26 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     if(editText_valor.getText().toString().length()==0){
                         editText_valor.setError("Favor inserir um valor para a promoção");
                     }
-                    if(checkDateFormat(editText_validade.getText().toString())==false){
-                        editText_validade.setError("Favor inserir uma data no formato dd/mm/aaaa");
+                    if(checkDateFormat(editText_validade.getText().toString())==false || validDate(editText_validade.getText().toString())==false){
+                        editText_validade.setError("");
+                        Toast.makeText(getApplicationContext(),"Favor inserir uma data no formato dd/mm/aaaa",Toast.LENGTH_SHORT).show();
                     }
                     if(txt_estabelecimento.getText().toString().length()==0){
                         txt_estabelecimento.setError("Favor selecionar o local da promoção");
                     }
                 } else {
+                    //Cria o gerador do AlertDialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    //define o titulo
+                    builder.setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                    //define a mensagem
+                    builder.setMessage("Aguarde enquanto a promoção é adicionada.");
+                    builder.setPositiveButton("Ok",null);
+                    alerta = builder.create();
+                    //Exibe
+                    alerta.show();
+                    Button positive = alerta.getButton(AlertDialog.BUTTON_POSITIVE);
+                    positive.setTextColor(Color.parseColor("#FF0B8B42"));
                     final Uri downloadUri;
                     mStorageRef = FirebaseStorage.getInstance().getReference();
                     String urlImg = "images/" + UUID.randomUUID() + ".jpg";
@@ -185,7 +192,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
-                                Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(), spinner_type_beer.getSelectedItem().toString(), spinner_content.getSelectedItem().toString(), editText_descricao.getText().toString(), estabelecimento, lat, lng, valor, downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), editText_validade.getText().toString(), 0);
+                                Promocao novapromocao = new Promocao(spinner_beers.getSelectedItem().toString(), spinner_type_beer.getSelectedItem().toString(), spinner_content.getSelectedItem().toString(), editText_descricao.getText().toString(), estabelecimento, lat, lng, valor, downloadUri.toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), editText_validade.getText().toString(), 0,0);
                                 db.collection("Promotion")
                                         .add(novapromocao)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -321,12 +328,14 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.putExtra("lat", latPoint);
                     i.putExtra("lng", lngPoint);
+                    finishAffinity();
                     startActivity(i);
                     break;
                 case R.id.navigation_perfil:
                     Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
                     x.putExtra("lat", latPoint);
                     x.putExtra("lng", lngPoint);
+                    finishAffinity();
                     startActivity(x);
                     break;
 
@@ -334,6 +343,7 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     Intent z = new Intent(getApplicationContext(), CadastroPromocoesActivity.class);
                     z.putExtra("lat", latPoint);
                     z.putExtra("lng", lngPoint);
+                    finishAffinity();
                     startActivity(z);
                     break;
 
@@ -341,12 +351,14 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
                     Intent m = new Intent(getApplicationContext(), MapsActivity.class);
                     m.putExtra("lat", latPoint);
                     m.putExtra("lng", lngPoint);
+                    finishAffinity();
                     startActivity(m);
                     break;
                 case R.id.navigation_favoritos:
                     Intent t = new Intent(getApplicationContext(), PromocoesFavoritasActivity.class);
                     t.putExtra("lat", latPoint);
                     t.putExtra("lng", lngPoint);
+                    finishAffinity();
                     startActivity(t);
                     break;
 
@@ -374,6 +386,26 @@ public class CadastroPromocoesActivity extends AppCompatActivity implements Bott
             }
         }
         else return false;
+    }
+    private boolean validDate(String dateEvent){
+        Date date = new Date();
+        String dateDay = getFormattedDate(date);
+        String dateDaySplit[] = dateDay.split("/");
+        String dateEventSplit[] = dateEvent.split("/");
+
+        long date1 = Long.parseLong(dateDaySplit[2] + dateDaySplit[1] + dateDaySplit[0]);
+        long date2 = Long.parseLong(dateEventSplit[2] + dateEventSplit[1] + dateEventSplit[0]);
+
+        if(date2 < date1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private String getFormattedDate(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return simpleDateFormat.format(date);
     }
 }
 

@@ -48,6 +48,7 @@ dependencies {
     //Database Firestore
     implementation 'com.google.firebase:firebase-firestore:17.1.0'
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+
     //Google Places
     implementation 'com.google.android.libraries.places:places:1.1.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
@@ -56,4 +57,6 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
+
+
 }

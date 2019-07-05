@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,7 +22,7 @@ public class CadastroTipo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_tipo);
-        final EditText editText_type_beer = findViewById(R.id.editText_value_beer);
+        final EditText editText_type_beer = findViewById(R.id.editText_comentario);
         FloatingActionButton btn_cadastrar = findViewById(R.id.btn_cadastrar);
         Intent intent = getIntent();
         Bundle i = intent.getExtras();
@@ -32,11 +31,11 @@ public class CadastroTipo extends AppCompatActivity {
         btn_cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String tipobeer = editText_type_beer.getText().toString();
+                final int tipobeer = editText_type_beer.getText().length();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 TipoCervejas tipo = new TipoCervejas(editText_type_beer.getText().toString().toUpperCase());
 
-                if (tipobeer != "") {
+                if (tipobeer>0) {
                     db.collection("TypeBeers")
                             .add(tipo)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -46,6 +45,7 @@ public class CadastroTipo extends AppCompatActivity {
                                     Intent x = new Intent(getApplicationContext(), PerfilActivity.class);
                                     x.putExtra("lat",lat);
                                     x.putExtra("lng",lng);
+                                    finishAffinity();
                                     startActivity(x);
                                 }
                             })
